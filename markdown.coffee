@@ -49,11 +49,11 @@ class Markdown
         2. Another item
           * Unordered sub-list.
         
-        `pos:2, ord:4`
+        `pos:2, order:4`
         
         This is some canvas text.
 
-        `p:5, order:1, another comment`
+        `p:5, o:1, another comment`
         123
         
         More canvas text.

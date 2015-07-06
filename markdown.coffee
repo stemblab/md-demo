@@ -41,16 +41,16 @@ class Markdown
         textCodeEsc =  matchEscape(preText, codeRe, escCodeMath)
 
         # escape MD chars within equations
-        escRe = ///[\\`\*_\{\}\[\]\(\)#\+\-\.\!]///g
+        escRe = /[\\`\*_\{\}\[\]\(\)#\+\-\.\!]/g
         escMarkdown = (u) -> u.replace escRe, (m) -> "\\#{m}"
         texRe = /(\$\$)([\s\S]*?)(\$\$)|(\$)([\s\S]*?)(\$)/mg
         textMdEsc =  matchEscape(textCodeEsc, texRe, escMarkdown)
 
         # restore escaped stuff
         text = textMdEsc
-            .replace(///\\&pound;///g,"\\$")
-            .replace(///\\&sect;///g,"\\`")
-            .replace(///\\&yen;///g,"$")
+            .replace(/\\&pound;/g,"\\$")
+            .replace(/\\&sect;/g,"\\`")
+            .replace(/\\&yen;/g,"$")
 
         console.log "text", text
 

@@ -1,4 +1,5 @@
 [
+    {"url": "./md.txt", "id": "md_data"},
     "marked.min.js",
     "main.html",
     "markdown.coffee"

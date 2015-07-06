@@ -1,0 +1,103 @@
+# blab title
+
+Ordinary dollar signs must be escaped  \$. 
+
+Per GFM, these characters must be escaped:
+\`,\*,\_,\{,\},\[,\],\(,\),\#,\+,\-,\.,\!
+
+Another dollar sign: \$. [\int x dx \$ is not treated as mathjax]).
+
+Inline math on one line: $x=y$ and $a=b$.
+
+Displayed equation:
+$$ u_t+uu_x+u_{xxx} = 0.$$1234567890
+A\*B (escaped \*)
+$$ 
+u_t+uu_x+u_{xxx} = \frac{a*b}{c}. 
+$$ 
+Some text, then inline: $x=b$.
+
+Some text, then inline: $x=c$.
+
+As code:
+
+```
+$$ \pi^2 / e $$
+```
+
+and another
+
+
+` $u_t+u_x = 0$ `
+
+
+
+
+This is an inline equation that is split over lines $a = b = c = d = e
+= f = g * h = i = j = k * l$
+
+
+The example below requires just 5 lines of new code (and editing a few lines of
+auto-generated code). Follow along and, in just a few moments, you can use this
+blab as a template for your own work. Let's start with some math:
+
+$$z(\theta;k)=x+iy=\exp(it)-\frac{1}{2}\exp(ikt)+\frac{1}{3}\exp(-i14t)$$
+
+The parameter $k*t$ is set by the slider, and the plot shows the real and imaginary
+parts of $z*1$ as $t*2$ is swept. The table shows powers of $k$.
+
+## sub heading
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | \$1600 |
+| col 2 is      | centered      |  $\$12$ |
+| zebra stripes | are neat      |    \$1 |
+
+1. First ordered list item
+2. Another item
+  * Unordered sub-list.
+
+[I'm an inline-style link](https://www.google.com)
+
+`pos:3`
+
+this is some canvas text asdkfh
+
+`pos:7 blah`
+
+1. First ordered list item
+2. Another item
+  * Unordered sub-list.
+        
+`pos:2, ord:4`
+        
+This is some canvas text.
+
+`p:5, order:1, another comment`
+123
+        
+More canvas text.
+
+abc
+
+* * *
+
+`pos:3`
+
+* * *
+
+`this is what? \theta?`
+
+Code to control the layout is auto-generated. You can show, then edit,
+this code by clicking the slider (label), plot, or table.
+
+To create your own blab, edit any code and click the "Save" button that appears
+in the upper right. Blabs are saved to GitHub gists. You can save anonymously
+(but each time you save you'll get a new gist ID), or to your GitHub account
+(using a token).
+
+You can edit this text by clicking anywhere on it (the source is
+GitHub Flavored Markdown).
+
+Finally, further documentation and examples can be found here.

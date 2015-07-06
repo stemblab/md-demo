@@ -12,54 +12,49 @@ class Markdown
     
     constructor: () ->
 
-        file = """
+        container = $("#app")
 
-        # blab heading
+        ##---- markdown & mathjax ----##
 
-        Some *introductory* __text__.
+        # can't use test string, so:
+        file =  $blab.resource "md_data"
 
-        ## sub heading
+        # replace troublesome stuff
+        preText = file
+            .replace(/\\\$/g,"\\&pound;") # \$
+            .replace(/\\`/g,"\\&sect;") # \`
 
-        | Tables        | Are           | Cool  |
-        | ------------- |:-------------:| -----:|
-        | col 3 is      | right-aligned | $1600 |
-        | col 2 is      | centered      |   $12 |
-        | zebra stripes | are neat      |    $1 |
+        # escape matching text
+        matchEscape = (text, RE, escape) ->
+            out = ""
+            pos = 0 # end position of last match 
+            while (match = RE.exec(text)) is not null
+                preMatch = text[pos...match.index]
+                escMatch = escape match[0]
+                out += preMatch + escMatch
+                pos = match.index+match[0].length 
+            out += text[pos..] # from last match to end
 
-        1. First ordered list item
-        2. Another item
-          * Unordered sub-list.
+        # escape $ within code sections
+        escCodeMath = (u) -> u.replace /\$/g, (m) -> "\\&yen;"
+        codeRe = /(```)([\s\S]*?)(```)|(`)([\s\S]*?)(`)/mg
+        textCodeEsc =  matchEscape(preText, codeRe, escCodeMath)
 
-        [I'm an inline-style link](https://www.google.com)
+        # escape MD chars within equations
+        escRe = ///[\\`\*_\{\}\[\]\(\)#\+\-\.\!]///g
+        escMarkdown = (u) -> u.replace escRe, (m) -> "\\#{m}"
+        texRe = /(\$\$)([\s\S]*?)(\$\$)|(\$)([\s\S]*?)(\$)/mg
+        textMdEsc =  matchEscape(textCodeEsc, texRe, escMarkdown)
 
-        `pos:6, comment`
+        # restore escaped stuff
+        text = textMdEsc
+            .replace(///\\&pound;///g,"\\$")
+            .replace(///\\&sect;///g,"\\`")
+            .replace(///\\&yen;///g,"$")
 
-        this is some canvas text asdkfh
+        console.log "text", text
 
-        | Tables        | Are           | Cool  |
-        | ------------- |:-------------:| -----:|
-        | col 3 is      | right-aligned | $1600 |
-        | col 2 is      | centered      |   $12 |
-        | zebra stripes | are neat      |    $1 |
-
-
-        `pos:7 blah`
-
-        1. First ordered list item
-        2. Another item
-          * Unordered sub-list.
-        
-        `pos:2, order:4`
-        
-        This is some canvas text.
-
-        `p:5, o:1, another comment`
-        123
-        
-        More canvas text.
-
-        abc
-        """
+        ##---- markdown sections ----##
 
         RE = ///
             ^\s*`\s*                   # begin-line, space and quote
@@ -76,17 +71,17 @@ class Markdown
 
         snippet = (found) ->
             start  = found.start ? 0
-            source = file[start..found.end]
+            source = text[start..found.end]
             start: start
             pos: found.pos ? 0 
             order: found.order ? 1
             source: source
-            html: marked source
+            html: marked  source
     
         # search file for "found" regex
         found = {}
 
-        while (match = RE.exec(file)) is not null
+        while (match = RE.exec(text)) is not null
 
             # snippet above match
             found.end = match.index-1
@@ -104,10 +99,10 @@ class Markdown
 
         # check stuff
         console.log "md", md    
-        container = $("#app")
+        
         for m in md 
             container.append("<p>pos:#{m.pos}, order:#{m.order}</p>")
             container.append(m.html)
-            container.append("<hr>")
+            container.append("<hr color='red'>")
 
 new Markdown

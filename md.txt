@@ -15,7 +15,7 @@ A\*B (escaped \*)
 $$ 
 u_t+uu_x+u_{xxx} = \frac{a*b}{c}. 
 $$ 
-Some text, then inline: $x=b$.
+Some text, then inline: $x_n=b_m$.
 
 Some text, then inline: $x=c$.
 
